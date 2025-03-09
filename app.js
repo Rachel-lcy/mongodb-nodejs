@@ -6,7 +6,7 @@ const { ObjectId } = require('mongodb')
 const app = express()
 
 // db connection
-let db
+let db;
 
 connectToDb((err) => {
   if(!err){
@@ -19,12 +19,14 @@ connectToDb((err) => {
 
 // routes
 app.get('/books', (req, res) => {
-  let books = []
+  let books = [];
 
   db.collection('books')
     .find()
     .sort({author: 1})
-    .forEach(book => books.push(book))
+    .forEach(book => 
+      books.push(book)
+    )
     .then(() => {
       res.status(200).json(books)
     })
